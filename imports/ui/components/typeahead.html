@@ -1,5 +1,10 @@
 <template name="typeahead">
   <div>
-    <input class="typeahead form-control" id={{id}} type="text" placeholder={{placeholder}} style="width:15em">
+    <input class="typeahead form-control" id={{id}} type="text" placeholder={{placeholder}} 
+    style="width:15em" data-value-key={{displayField}} data-templates="empty:typeaheadEmpty">
   </div>
+</template>
+
+<template name="typeaheadEmpty">
+  add {{value}}
 </template>

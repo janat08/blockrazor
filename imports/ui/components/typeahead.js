@@ -1,6 +1,6 @@
-import typeahead from 'corejs-typeahead' //maintained typeahead
 import './typeahead.html'
 import './typeahead.css'
+// import typeahead from 'corejs-typeahead' //maintained typeahead 
 
 import {
 	Template
@@ -55,8 +55,10 @@ import {
 }
 */
 
+let id
+
 Template.typeahead.onCreated(function () {
-  
+
   //init default values if not specified
   this.data.id = this.data.id == undefined? Random.id()+"": this.data.id+""
   this.data.transcient = this.data.transcient == undefined? true: this.data.transcient
@@ -64,10 +66,13 @@ Template.typeahead.onCreated(function () {
   this.data.autoFocus = this.data.autoFocus === undefined? false: this.data.autoFocus
   this.data.quickEnter = this.data.quickEnter === undefined? true: this.data.quickEnter
   this.data.noneFound = this.data.noneFound === undefined? function(templ, eleId){ return 'no result found' } : this.data.noneFound
+  this.value = new ReactiveVar()
 
   var props = this.data
   var templ = props.template
   this.ele = "#"+props.id
+
+  id = this.ele
   
 
   //query to run
@@ -115,14 +120,18 @@ Template.typeahead.onCreated(function () {
       }
     }
 
-		function curryEvent (template) {
+		function curryEvent (template, typeahead) {
       return function(event, value){
         // typeahead renitiliazed reactively
         props.add(event, value, template)
+        Session.set("typeaheadValue", value[typeahead.data.displayField])
       }
-		}
+    }
     
-    $(this.ele).typeahead(option1, option2)
+    this.currySearch = currySearch
+    
+    // $(this.ele).typeahead(option1, option2)
+    Meteor.typeahead($(this.ele), this.currySearch(templ, this))
 
     //adds first found entry in autocomplete on enter keypress
     if (props.quickEnter){
@@ -149,6 +158,8 @@ Template.typeahead.onCreated(function () {
 
 Template.typeahead.onRendered(function () {
   //reinitialize typeahead once static data is ready, and typeahead rendered
+  var props = this.data
+  var templ = props.template
 	this.autorun((comp) => {
 		if (this.data.transcient && this.data.col.readyLocal()) {
       $(this.ele).typeahead('destroy')
@@ -164,17 +175,18 @@ Template.typeahead.onRendered(function () {
     // and the below
     // used to keep typeahead data source reactive, running currySearch callback- CB- within autorun will not update selection menu
     this.search("")
+    console.log(this.ele)
     if (document.activeElement === document.getElementById(this.data.id)){
       $(this.ele).typeahead('destroy')
       $(this.ele).blur()
-      $(this.ele).typeahead(this.option1, this.option2)
+      Meteor.typeahead($(this.ele), this.currySearch(templ, this))
       $(this.ele).typeahead('val', '');
       if (this.data.autoFocus, this.data){
         $(this.ele).focus()
       }
     } else {
       $(this.ele).typeahead('destroy')
-      $(this.ele).typeahead(this.option1, this.option2)
+      Meteor.typeahead($(this.ele), this.currySearch(templ, this))
     }
   })
 })
@@ -190,5 +202,37 @@ Template.typeahead.helpers({
   },
   placeholder: ()=>{
     return Template.instance().data.placeholder
+  },
+  displayField: ()=>{
+    return Template.instance().data.displayField
+  }
+  // source: ()=>{
+  //   const template = Templaste.instance()
+  //   const parent = templ.data.template
+
+  //   return this.search().map(x=>x[template.data.displayField])
+  // }
+})
+
+Template.typeahead.events({
+  [`change ${id}`]: function (eve){
+    console.log(eve)
+  },
+  [`keyup ${id}`]: function (eve){
+    console.log(eve)
   }
 })
+
+Template.typeaheadEmpty.helpers({
+  value(){
+    return Session.get("typeaheadValue")
+}
+})
+
+// Template.typeaheadEmpty.events({
+
+// })
+
+// Template.typeaheadEmpty.onCreated(()=>{
+//   this.value = 
+// })
