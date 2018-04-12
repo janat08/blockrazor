@@ -1,14 +1,19 @@
-import renderBlaze from 'blaze-renderer'
-import assert from 'assert'
-// require('./typeahead')
+// import * as ren from 'blaze-renderer'
+import renderBlaze, {parseTemplates, renderBlazeWithData} from 'blaze-renderer'
+// import assert from 'assert'
+import { runInFiber } from "testable-meteor";
+
+// require ('./typeahead.parent.js')
+import './typeahead.parent.js'
+// import './loading.js'
 
 const baseUrl = 'http://localhost:3000' // baseUrl of the app we are testing, it's localhost here, as we're starting a local server in Travis CI cycle
 
-describe('test', function() {
-	it ('passes', function() {
-		assert(true, true)
-	})
-})
+// describe('test', function() {
+// 	it ('passes', function() {
+// 		assert(true, true) 
+// 	})
+// })
 
 //see the full webdriverio browser API here: http://webdriver.io/api.html
 // describe('Home page', function () {
@@ -20,47 +25,12 @@ describe('test', function() {
 //     })
 // // })
 
-/* it('renders typeahead', () => {
+// it('parse templates', runInFiber(() => {
+// 	console.log(ren)
+// 	expect(ren.parseTemplates(ren.returnAllTemplates('imports/'))).toMatchSnapshot()
+// }))
+
+ test('renders typeahead', runInFiber(() => {
     const typeahead = renderBlaze('typeaheadSnapshotTesting')
     expect(typeahead).toMatchSnapshot()
-})
-
-Template.typeaheadSnapshotTesting.onCreate(()=>{
-	this.selectedId = new ReactiveVar()
-})
-
-Template.typeaheadSnapshotTesting.helpers({
-	params(){
-        return {
-    	    limit: 15,
-            query: function(templ, entry) {
-                return {
-               		$or: [{
-                 		currencyName: new RegExp(entry, 'ig')
-               		}, {
-                 		currencySymbol: new RegExp(entry, 'ig')
-               		}],
-             	}
-           },
-           projection: function(templ, entry) {
-             	return {
-               		limit: 15,
-               		sort: {
-                 		currencyName: 1
-              		}
-             	}
-           	},
-           	add: function(event, doc, templ) {
-           		templ.selectedId.set(doc.currencySymbol)
-           	},
-           	col: Currencies, //collection to use
-           	template: Template.instance(), //parent template instance
-           	focus: false,
-           	autoFocus: false,
-          	quickEnter: true,
-           	displayField: 'currencyName', //field that appears in typeahead select menu
-           	placeholder: 'Search cryptocurrencies'
-        }
-    }
-})
-*/
+}))

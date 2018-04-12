@@ -1,13 +1,8 @@
 import typeahead from 'corejs-typeahead' //maintained typeahead
 import './typeahead.html'
 import './typeahead.css'
-
-import {
-	Template
-} from 'meteor/templating';
-import {
-	Features,
-} from '/imports/api/indexDB.js'
+import { Template } from "meteor/templating";
+import { ReactiveVar } from "meteor/reactive-var";
 
 /*
 {

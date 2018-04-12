@@ -2,10 +2,20 @@
   "env": {
     "test": {
       "presets":[
-        ["env", { "modules": false }]
+        "es2015-without-strict"
       ],
       "plugins": [
-        "transform-es2015-modules-commonjs"
+        "ignore-html-and-css-imports",
+        "transform-object-rest-spread",
+        "transform-es2015-modules-commonjs",
+        [
+          "module-resolver",
+          {
+            "alias": {
+              "meteor": "./node_modules/testable-meteor/dist/stubs"
+            }
+          }
+        ]
       ]
     }
   }

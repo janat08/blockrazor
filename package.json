@@ -6,7 +6,7 @@
     "start": "meteor run",
     "debug": "meteor run --inspect",
     "lint": "./node_modules/.bin/eslint . --fix",
-    "test": "jest --testMatch \"**/?(*.)(jest-test).js?(x)\" --passWithNoTests --watch"
+    "test": "jest --testMatch \"**/?(*.)(jest-test).js?(x)\" --passWithNoTests"
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
@@ -24,7 +24,7 @@
     "later": "^1.2.0",
     "lodash.get": "^4.4.2",
     "marked": "^0.3.17",
-    "meteor-node-stubs": "~0.2.4",
+    "meteor-node-stubs": "^0.2.11",
     "mime-types": "^2.1.17",
     "moment": "^2.20.1",
     "recaptcha-v2": "^0.1.3",
@@ -36,9 +36,13 @@
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.2",
     "babel-jest": "^22.4.3",
+    "babel-plugin-ignore-html-and-css-imports": "0.0.2",
+    "babel-plugin-module-resolver": "^3.1.1",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-es2015-without-strict": "0.0.4",
     "blaze-renderer": "^0.9.0",
     "eslint": "^4.19.1",
     "eslint-config-standard": "^11.0.0",
@@ -46,6 +50,7 @@
     "eslint-plugin-node": "^6.0.1",
     "eslint-plugin-promise": "^3.7.0",
     "eslint-plugin-standard": "^3.0.1",
-    "jest": "^22.4.3"
+    "jest": "^22.4.3",
+    "testable-meteor": "^1.0.0"
   }
 }
