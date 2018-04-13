@@ -40,7 +40,6 @@
     "babel-jest": "^22.4.3",
     "babel-plugin-ignore-html-and-css-imports": "0.0.2",
     "babel-plugin-module-resolver": "^3.1.1",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-es2015-without-strict": "0.0.4",
     "blaze-renderer": "^0.9.0",

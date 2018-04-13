@@ -2,6 +2,8 @@
 import renderBlaze, {parseTemplates, renderBlazeWithData} from 'blaze-renderer'
 // import assert from 'assert'
 import { runInFiber } from "testable-meteor";
+// jest.mock('meteor/socialize:user-presence')
+// import { UserPresence} from 'meteor/socialize:user-presence'
 
 // require ('./typeahead.parent.js')
 import './typeahead.parent.js'
