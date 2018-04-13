@@ -15,7 +15,6 @@
     "bootstrap-slider": "^10.0.0",
     "chart.js": "^2.7.1",
     "core-js": "^2.5.3",
-    "corejs-typeahead": "^1.2.1",
     "disposable-email": "^0.2.3",
     "fibers": "^2.0.0",
     "hammerjs": "^2.0.8",

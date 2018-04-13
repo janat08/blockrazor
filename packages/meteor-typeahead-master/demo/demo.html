@@ -1,0 +1,200 @@
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>demo</title>
+	<style>
+		.form-control {
+			width: 400pt;
+		}
+		.gist {
+			width: 100%;
+			font-size: 12px;
+			text-align: left;
+		}
+	</style>
+</head>
+
+<body>
+{{>demo}}
+</body>
+
+<template name="demo">
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6">
+			{{>basic}}
+			{{>open_on_focus}}
+			{{>always_all_suggestions}}
+			{{>langs}}
+			{{>prefetch}}
+			{{>multiple_datasets}}
+			{{>custom_template}}
+			{{>async_source}}
+			{{>feed}}
+			{{>server_side}}
+		</div>
+	</div>
+</template>
+
+<template name="block">
+	<div>{{> UI.contentBlock}}</div>
+</template>
+
+<template name="open_on_focus">
+	<div>
+		<h2>Open dropdown on focus (issue #49)</h2>
+		<div class="form-group">
+			<input class="form-control typeahead" name="team" type="text"
+							placeholder="NBA teams" autocomplete="off" spellcheck="off"
+							data-source="Nba.name" data-min-length="0"/>
+		</div>
+	</div>
+</template>
+
+<template name="always_all_suggestions">
+	<div>
+		<h2>Always show all results (issue #90)</h2>
+		<div class="form-group">
+			<input class="form-control typeahead" name="team" type="text"
+							placeholder="NBA teams" autocomplete="off" spellcheck="off"
+							data-source="nba" data-min-length="0" data-limit="100"/>
+		</div>
+	</div>
+</template>
+
+<template name="basic">
+	{{#block}}
+		<h2>Using data-source attribute</h2>
+		<div class="form-group">
+			{{#if true}}
+			<input id="nba_teams" class="form-control typeahead" name="super.team.name" type="text"
+						 	placeholder="NBA teams" autocomplete="off" spellcheck="off"
+							data-source="nba" data-open="open" data-close="close" data-select="select" data-autocomplete="autocomplete"/>
+			<button id="btn_open">Open</button>
+			<button id="btn_close">Close</button>
+			{{/if}}
+		</div>
+		<div class="gist">
+			{{{gist 'sergeyt' '8054081'}}}
+		</div>
+		<div class="gist">
+			{{{gist 'sergeyt' '8054591'}}}
+		</div>
+	{{/block}}
+</template>
+
+<template name="langs">
+	<div>
+		<h2>Array of objects without value property.</h2>
+		<div class="form-group">
+			<input class="form-control typeahead" name="lang" type="text" placeholder="Programming language"
+				autocomplete="off" spellcheck="off" data-source="list" data-value-key="name"/>
+		</div>
+		<div class="gist">
+			{{{gist 'sergeyt' '1268ec50617b3efa2142'}}}
+		</div>
+		<div class="gist">
+			{{{gist 'sergeyt' '109d44d69582e8512a5f'}}}
+		</div>
+	</div>
+</template>
+
+<template name="prefetch">
+	<div>
+		<h2>Prefetch</h2>
+		<div class="form-group">
+			<input class="form-control typeahead" name="country" type="text" placeholder="Country"
+				   autocomplete="off" spellcheck="off" data-source="/data/countries.json"/>
+		</div>
+		<div class="gist">
+			{{{gist 'sergeyt' 'fcf8b91634ba4003980f'}}}
+		</div>
+	</div>
+</template>
+
+<template name="multiple_datasets">
+	<div>
+		<h2>Multiple datasets</h2>
+		<div class="form-group example-sports">
+			<input class="form-control typeahead" name="team" type="text" placeholder="NBA and NHL teams"
+				   autocomplete="off" spellcheck="off"
+				   data-sets="teams"/>
+		</div>
+		<div class="gist">
+			{{{gist 'sergeyt' '8054642'}}}
+		</div>
+		<div class="gist">
+			{{{gist 'sergeyt' '8054660'}}}
+		</div>
+	</div>
+</template>
+
+<template name="team">
+	<h4><i>{{name}}</i></h4>
+</template>
+
+<template name="custom_template">
+	<div>
+		<h2>Using custom template</h2>
+		<div class="form-group example-twitter-oss">
+			<input class="form-control typeahead" name="repo" type="text" placeholder="open source projects by Twitter"
+				   autocomplete="off" spellcheck="off"
+				   data-source="repos" data-templates="repo;empty:noresults"/>
+		</div>
+		<div class="gist">
+			{{{gist 'sergeyt' '8054682'}}}
+		</div>
+		<div class="gist">
+			{{{gist 'sergeyt' '8054730'}}}
+		</div>
+	</div>
+</template>
+
+<template name="repo">
+	<p class="repo-language">{{language}}</p>
+	<p class="repo-name">{{name}}</p>
+	<p class="repo-description">{{description}}</p>
+</template>
+
+<template name="noresults">
+	<span>No results found</span>
+</template>
+
+<template name="async_source">
+	<div>
+		<h2>Async reactive data-source</h2>
+		<div class="form-group">
+			<input class="form-control typeahead" name="emails" type="text" placeholder="emails"
+				   autocomplete="off" spellcheck="off"
+				   data-source="emails"/>
+		</div>
+		<div class="gist">
+			{{{gist 'sergeyt' '8054834'}}}
+		</div>
+		<div class="gist">
+			{{{gist 'sergeyt' '8054865'}}}
+		</div>
+	</div>
+</template>
+
+<template name="feed">
+	<div>
+		<h2>Queryable data feed</h2>
+		<div class="form-group">
+			<input class="form-control typeahead" name="feed" type="text" placeholder="Type to query data feed"
+				   autocomplete="off" spellcheck="off"
+					data-source="feed"/>
+		</div>
+	</div>
+</template>
+
+<template name="server_side">
+	<div>
+		<h2>Server side search</h2>
+		<div class="form-group">
+			<input class="form-control typeahead" name="search" type="text" placeholder="Type to query"
+				   autocomplete="off" spellcheck="off"
+				   data-source="search"/>
+		</div>
+	</div>
+</template>

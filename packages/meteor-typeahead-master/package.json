@@ -1,0 +1,45 @@
+{
+  "name": "meteor-typeahead",
+  "version": "0.11.1",
+  "description": "Autocomplete package for meteor powered by twitter typeahead.js",
+  "license": "MIT",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:sergeyt/meteor-typeahead.git"
+  },
+  "keywords": [
+    "meteor",
+    "typeahead",
+    "autocomplete"
+  ],
+  "author": "Sergey Todyshev <stodyshev@gmail.com>",
+  "contributors": [
+    "Sergey Todyshev <stodyshev@gmail.com>",
+    "Benjamin Berman <benjamin.s.berman@gmail.com>",
+    "Dan Dascalescu <ddascalescu+github@gmail.com>",
+    "Jess Latimer <jplatimer@gmail.com>",
+    "Oliver Lloyd <oliver_lloyd@hotmail.com>",
+    "Thimo Brinkmann <thimo.brinkmann@googlemail.com>",
+    "cinjon <cinjon.resnick@gmail.com>",
+    "grigio <grigio.org@gmail.com>",
+    "zhenya <eugeneas@gmail.com>",
+    "BBLN",
+    "Daniela Meneses <daniela11290@gmail.com>"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "coffeelint": "^1.15.0",
+    "grunt": "^0.4.5",
+    "grunt-auto-release": "^0.0.6",
+    "grunt-bump": "^0.7.0",
+    "grunt-cli": "^1.2.0",
+    "grunt-coffeelint": "^0.0.15",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-npm": "^0.0.2"
+  },
+  "scripts": {
+    "lint": "grunt lint",
+    "test": "grunt test"
+  }
+}
