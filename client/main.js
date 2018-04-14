@@ -1,8 +1,8 @@
 import { Accounts } from 'meteor/accounts-base';
 import '/imports/startup/client';
 import { UserData, Features, Summaries, Redflags, Currencies } from '/imports/api/indexDB.js';
-window.Currencies = Currencies
-
+import SimpleSchema from 'simpl-schema'
+window.SimpleSchema = SimpleSchema
 const collections = { Features, Summaries, Redflags }
 
 import Cookies from 'js-cookie'
