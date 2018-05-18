@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////
 // Package docs at http://docs.meteor.com/#tracker //
 /////////////////////////////////////////////////////
-import { observable, observe } from '@nx-js/observer-util'
+// import { observable, observe } from '@nx-js/observer-util'
 
 
 /**
