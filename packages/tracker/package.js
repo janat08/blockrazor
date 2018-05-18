@@ -4,6 +4,7 @@ Package.describe({
 });
 
 Package.onUse(function (api) {
+    api.use(["modules", "ecmascript"]);
   api.export('Tracker');
   api.export('Deps');
   api.addFiles('tracker.js');
@@ -19,4 +20,5 @@ Package.onTest(function (api) {
 
 Npm.depends({
     '@nx-js/observer-util': '4.1.2',
+    '@nx-js/queue-util': '1.1.1'
   });
