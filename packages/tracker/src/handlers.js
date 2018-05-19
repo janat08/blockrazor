@@ -7,21 +7,21 @@ import {
 } from './reactionRunner'
 
 const hasOwnProperty = Object.prototype.hasOwnProperty
-function undefined(arguments){
-    var res = true
-    arguments.forEach(x=>
-    {
-        res = res && (x == undefined)
-    })
-    return res
-}
+// function _undefined(arguments){
+//     var res = true
+//     arguments.forEach(x=>
+//     {
+//         res = res && (x == undefined)
+//     })
+//     return res
+// }
 // intercept get operations on observables to know which reaction uses their properties
 export function get (target, key, receiver) {
-    trackerDepend = undefined(target,key, value)
-    if (trackerDepend){
-        registerRunningReactionForOperation({ target, key, receiver, type: 'get' })
-        break
-    }
+    // trackerDepend = _undefined([target,key, value])
+    // if (trackerDepend){
+    //     registerRunningReactionForOperation({ target, key, receiver, type: 'get' })
+    //     return
+    // }
   const result = Reflect.get(target, key, receiver)
   // do not register (observable.prop -> reaction) pairs for these cases
   if (typeof key === 'symbol' || typeof result === 'function') {
@@ -69,8 +69,8 @@ function ownKeys (target) {
 // intercept set operations on observables to know when to trigger reactions
 export function set (target, key, value, receiver) {
   // make sure to do not pollute the raw object with observables
-  trackerChange = undefined(target,key, value)
-  if (!trackerChange) {
+//   trackerChange = _undefined([target,key, value])
+//   if (!trackerChange) {
   if (typeof value === 'object' && value !== null) {
     value = proxyToRaw.get(value) || value
   }
@@ -94,10 +94,9 @@ export function set (target, key, value, receiver) {
   if (typeof key === 'symbol' || target !== proxyToRaw.get(receiver)) {
     return result
   }
-}
 
   // queue a reaction if it's a new property or its value changed
-  if (trackerChange || !hadKey || !(target && key && value && receiver)) {
+  if (!hadKey) {
     queueReactionsForOperation({ target, key, value, receiver, type: 'add' })
   } else if (value !== oldValue) {
     queueReactionsForOperation({

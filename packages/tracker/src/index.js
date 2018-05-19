@@ -1,5 +1,7 @@
-export { observe, unobserve, IS_REACTION } from './observer'
-export { observable, isObservable, raw } from './observable'
+import { observe, unobserve, IS_REACTION } from './observer'
+import { observable, isObservable, raw } from './observable'
+// export { observe, unobserve, IS_REACTION } from './observer'
+// export { observable, isObservable, raw } from './observable'
 import {get, set} from './handlers'
 import {runningReaction} from './reactionRunner'
 
@@ -8,7 +10,7 @@ export var afterFlushCallbacks = [];
 Tracker = {
     _runningReaction: runningReaction,
     _computation: null,
-    get currentComputation (){return computation},
+    get currentComputation (){return this.computation},
     set currentComputation (item){
         if (item[IS_REACTION]){
             _computation = this._runningReaction
@@ -42,7 +44,9 @@ Tracker.nonreactive = function (f) {
  * @instanceName dependency
  */
 Tracker.Dependency = function () {
-    break
+    this.a = observable({count: 0})
+    this.count = 0
+    return
   };
   
   // http://docs.meteor.com/#dependency_depend
@@ -63,7 +67,7 @@ Tracker.Dependency = function () {
    * @returns {Boolean}
    */
   Tracker.Dependency.prototype.depend = function (computation) {
-    get()
+      this.a.count
   };
   
   // http://docs.meteor.com/#dependency_changed
@@ -73,7 +77,7 @@ Tracker.Dependency = function () {
    * @locus Client
    */
   Tracker.Dependency.prototype.changed = function () {
-    set()
+    ++this.a.count
   };
   
   // http://docs.meteor.com/#dependency_hasdependents

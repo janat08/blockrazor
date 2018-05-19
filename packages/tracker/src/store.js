@@ -1,5 +1,6 @@
 const connectionStore = new WeakMap()
 const ITERATION_KEY = Symbol('iteration key')
+var id = 0
 
 export function storeObservable (obj) {
   // this will be used to save (obj.key -> reaction) connections later
@@ -23,7 +24,7 @@ export function registerReactionForOperation (reaction, { target, key, type }) {
   }
 }
 
-export function getReactionsForOperation ({ target, key, type }) {
+export function getReactionsForOperation ({ target = {id: id++}, key= "id", type }) {
   const reactionsForTarget = connectionStore.get(target)
   const reactionsForKey = new Set()
 
