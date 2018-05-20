@@ -12,7 +12,7 @@ import SimpleSchema from 'simpl-schema';
 
 
 //can't extend custom/autoValue fields therefore some of the form related parsers/validators may reside on original schema
-const addCoinFormSchema =  new SimpleSchema(Currencies.schema.pick(
+export const addCoinFormSchema =  new SimpleSchema(Currencies.schema.pick(
     'currencyName', 'currencySymbol', 'premine', 'maxCoins', 'consensusSecurity', 'gitRepo', 
 'officialSite', 'reddit', 'blockExplorer', 'currencyLogoFilename', 'confirmations', 'previousNames', 'exchanges', 
 'launchTags', 'blockTime', 'forkHeight', 'forkParent', 'hashAlgorithm', 'ICOfundsRaised', 'genesisTimestamp', 'proposal', 'altcoin', 
