@@ -14,6 +14,7 @@ import {
     addCoinFormSchema
 } from '/imports/api/coins/methods'
 import ('sweetalert2').then(swal => window.swal = swal.default)
+import SimpleSchema from 'simpl-schema';
 
 import Cookies from 'js-cookie';
 import smartWizard from 'smartwizard';
